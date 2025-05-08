@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Image } from "lucide-react";
+import { Image, Menu, X } from "lucide-react";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,8 +24,8 @@ export default function Navigation() {
           </Link>
           <a href="#meetings" className="text-gray-700 hover:text-primary transition-colors">Meetings</a>
         </div>
-        <div className="md:hidden" onClick={toggleMenu}>
-          <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line ri-2x cursor-pointer`}></i>
+        <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </div>
       </div>
     </nav>

@@ -2,6 +2,13 @@
 import Navigation from "@/components/Navigation";
 import { useEffect } from "react";
 
+// Define a type for the TomTom SDK to fix the error
+declare global {
+  interface Window {
+    tt: any;
+  }
+}
+
 const Index = () => {
   useEffect(() => {
     // Smooth scrolling for anchor links
@@ -22,9 +29,9 @@ const Index = () => {
     });
 
     // Load TomTom map if available
-    if (typeof tt !== 'undefined' && document.getElementById('map')) {
+    if (typeof window.tt !== 'undefined' && document.getElementById('map')) {
       try {
-        const map = tt.map({
+        const map = window.tt.map({
           key: 'supu8hAZdQgayQ7E3SfxLUK1M8ocVw7W',
           container: 'map',
           center: [72.63054749391392, 23.18436526489801],
@@ -42,7 +49,7 @@ const Index = () => {
         `;
 
         // Add custom marker to map
-        new tt.Marker({
+        new window.tt.Marker({
           element: markerElement
         }).setLngLat([72.63054749391392, 23.18436526489801]).addTo(map);
       } catch (error) {

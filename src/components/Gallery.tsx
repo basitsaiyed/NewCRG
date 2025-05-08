@@ -1,8 +1,9 @@
 
 import { useState } from "react";
-import { Image } from "lucide-react";
+import { ArrowLeft, ArrowRight, Image, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 type GalleryImage = {
   id: string;
@@ -13,7 +14,7 @@ type GalleryImage = {
 };
 
 export default function Gallery() {
-  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   
   // Sample gallery images - replace with your actual images later
   const galleryImages: GalleryImage[] = [
@@ -73,74 +74,169 @@ export default function Gallery() {
       caption: "Annual awards ceremony",
       date: "December 15, 2024"
     },
+    {
+      id: "9",
+      src: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+      alt: "Technical presentation",
+      caption: "Technical skills workshop",
+      date: "November 30, 2024"
+    },
+    {
+      id: "10",
+      src: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+      alt: "Programming workshop",
+      caption: "Communication in tech industry",
+      date: "November 15, 2024"
+    },
+    {
+      id: "11",
+      src: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+      alt: "Digital communication",
+      caption: "Workshop on digital communication",
+      date: "October 25, 2024"
+    },
+    {
+      id: "12",
+      src: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      alt: "Tech speech contest",
+      caption: "Technology speech competition",
+      date: "October 10, 2024"
+    },
   ];
 
-  const openLightbox = (image: GalleryImage) => {
-    setSelectedImage(image);
+  const openLightbox = (index: number) => {
+    setSelectedImageIndex(index);
     document.body.style.overflow = "hidden";
   };
 
   const closeLightbox = () => {
-    setSelectedImage(null);
+    setSelectedImageIndex(null);
     document.body.style.overflow = "auto";
+  };
+
+  const navigateImage = (direction: "next" | "prev") => {
+    if (selectedImageIndex === null) return;
+    
+    if (direction === "next") {
+      setSelectedImageIndex((selectedImageIndex + 1) % galleryImages.length);
+    } else {
+      setSelectedImageIndex((selectedImageIndex - 1 + galleryImages.length) % galleryImages.length);
+    }
   };
 
   return (
     <div className="container mx-auto px-6 py-16">
       <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Gallery</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Photo Gallery</h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
           Explore moments from our previous meetings and events. These images capture our journey of growth, learning, and friendship.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {galleryImages.map((image) => (
+      {/* Thumbnail Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {galleryImages.map((image, index) => (
           <Card 
             key={image.id} 
             className="overflow-hidden group cursor-pointer hover:shadow-lg transition-all duration-300"
-            onClick={() => openLightbox(image)}
+            onClick={() => openLightbox(index)}
           >
-            <div className="relative aspect-video overflow-hidden bg-gray-100">
+            <div className="relative aspect-square overflow-hidden bg-gray-100">
               <img
                 src={image.src}
                 alt={image.alt}
                 className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300" />
+              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                <div className="transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                  <div className="w-10 h-10 rounded-full bg-white bg-opacity-75 flex items-center justify-center">
+                    <Image size={20} className="text-primary" />
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="p-4">
-              <p className="font-medium text-gray-900">{image.caption}</p>
-              <p className="text-sm text-gray-500">{image.date}</p>
+            <div className="p-3">
+              <p className="text-sm font-medium text-gray-900 truncate">{image.caption}</p>
+              <p className="text-xs text-gray-500">{image.date}</p>
             </div>
           </Card>
         ))}
       </div>
 
       {/* Lightbox */}
-      {selectedImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 p-4" onClick={closeLightbox}>
-          <div className="relative max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
+      {selectedImageIndex !== null && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4" onClick={closeLightbox}>
+          <div className="relative max-w-5xl w-full h-full flex flex-col items-center justify-center" onClick={(e) => e.stopPropagation()}>
+            {/* Close button */}
             <button 
-              className="absolute -top-12 right-0 text-white p-2 hover:bg-white hover:bg-opacity-20 rounded-full"
+              className="absolute top-4 right-4 md:top-6 md:right-6 text-white p-2 hover:bg-white hover:bg-opacity-20 rounded-full z-10"
               onClick={closeLightbox}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
+              <X size={24} />
             </button>
-            <div className="bg-white rounded-lg overflow-hidden">
-              <div className="relative aspect-video">
-                <img 
-                  src={selectedImage.src} 
-                  alt={selectedImage.alt} 
-                  className="object-contain w-full h-full"
-                />
-              </div>
-              <div className="p-4 bg-white">
-                <p className="font-medium text-gray-900">{selectedImage.caption}</p>
-                <p className="text-sm text-gray-500">{selectedImage.date}</p>
+            
+            {/* Navigation buttons */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute left-2 md:left-5 text-white hover:bg-white hover:bg-opacity-20 rounded-full z-10"
+              onClick={(e) => {
+                e.stopPropagation();
+                navigateImage("prev");
+              }}
+            >
+              <ArrowLeft size={32} />
+            </Button>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-2 md:right-5 text-white hover:bg-white hover:bg-opacity-20 rounded-full z-10"
+              onClick={(e) => {
+                e.stopPropagation();
+                navigateImage("next");
+              }}
+            >
+              <ArrowRight size={32} />
+            </Button>
+
+            {/* Main image */}
+            <div className="relative w-full h-4/5 flex items-center justify-center">
+              <img 
+                src={galleryImages[selectedImageIndex].src} 
+                alt={galleryImages[selectedImageIndex].alt} 
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+
+            {/* Caption */}
+            <div className="p-4 text-center text-white mt-4">
+              <p className="font-medium text-lg">{galleryImages[selectedImageIndex].caption}</p>
+              <p className="text-sm text-gray-300">{galleryImages[selectedImageIndex].date}</p>
+            </div>
+
+            {/* Thumbnail navigation */}
+            <div className="absolute bottom-4 left-0 right-0">
+              <div className="flex justify-center items-center gap-2 overflow-x-auto py-2 px-4">
+                {galleryImages.map((image, index) => (
+                  <div 
+                    key={image.id} 
+                    className={cn(
+                      "w-12 h-12 flex-shrink-0 rounded-md overflow-hidden border-2 transition-all cursor-pointer",
+                      selectedImageIndex === index ? "border-white" : "border-transparent hover:border-gray-300"
+                    )}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedImageIndex(index);
+                    }}
+                  >
+                    <img 
+                      src={image.src} 
+                      alt={image.alt} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
