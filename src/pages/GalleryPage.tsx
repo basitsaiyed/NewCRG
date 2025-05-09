@@ -1,9 +1,15 @@
 
+import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Gallery from "@/components/Gallery";
 import { motion } from "framer-motion";
 
 const GalleryPage = () => {
+  // Scroll to top when the gallery page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
