@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Gallery from "@/components/Gallery";
+import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 
 const GalleryPage = () => {
@@ -32,6 +33,7 @@ const GalleryPage = () => {
         </div>
         <Gallery />
       </motion.div>
+      <Footer />
     </div>
   );
 };

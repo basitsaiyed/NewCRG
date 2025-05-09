@@ -1,19 +1,16 @@
 
-import React from "react";
-import { Button } from "@/components/ui/button";
+import React, { useEffect } from "react";
 import Navigation from "@/components/Navigation";
+import MeetingInfo from "@/components/MeetingInfo";
+import CTASection from "@/components/CTASection";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
 import {
-  MapPin,
-  Calendar,
-  Clock,
   Award,
   BookOpen,
   Users,
   MessageCircle,
-  ArrowRight,
-  Mic
 } from "lucide-react";
-import { useEffect } from "react";
 import CommitteeMember from "@/components/CommitteeMember";
 
 // Define a type for the TomTom SDK to fix the error
@@ -224,153 +221,13 @@ const Index = () => {
       </section>
 
       {/* Meeting Information Section */}
-      <section id="meetings" className="py-16 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-gray-900">Club Meetings</h2>
-            <p className="text-lg text-gray-600">
-              Join us at our weekly meetings to develop your communication and leadership skills in a supportive environment.
-            </p>
-          </div>
-          
-          <div className="flex flex-col lg:flex-row gap-8">
-            <div className="lg:w-1/2 bg-white p-8 rounded-lg shadow-md border border-gray-100">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="bg-amber-100 p-2 rounded-full text-amber-600 mt-1">
-                      <MapPin className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">Location</h3>
-                      <p className="text-gray-600">Harmony Living Ed Value Chain Solutions Pvt Ltd. E-329, 3rd Floor, Pramukh Anand Orbit Mall, Kudasan, Gandhinagar</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="bg-amber-100 p-2 rounded-full text-amber-600 mt-1">
-                      <Calendar className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">Day</h3>
-                      <p className="text-gray-600">Every Sunday</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="bg-amber-100 p-2 rounded-full text-amber-600 mt-1">
-                      <Clock className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">Time</h3>
-                      <p className="text-gray-600">11:00 AM - 12:30 PM</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="bg-amber-100 p-2 rounded-full text-amber-600 mt-1">
-                      <Mic className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">Format</h3>
-                      <p className="text-gray-600">Prepared speeches, evaluations, and impromptu speaking</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id="map" className="lg:w-1/2 h-[400px] rounded-lg shadow-md"></div>
-          </div>
-        </div>
-      </section>
+      <MeetingInfo />
 
       {/* CTA section */}
-      <section className="py-16 bg-gradient-to-r from-amber-500 to-amber-600 text-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">Ready to Take the Next Step?</h2>
-            <p className="text-xl mb-8">
-              Visit us as a guest with no obligation. Experience firsthand how Toastmasters can help you become a confident speaker and leader.
-            </p>
-            <Button size="lg" className="bg-white text-amber-600 hover:bg-gray-100">
-              Join Our Next Meeting <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </div>
-        </div>
-      </section>
+      <CTASection />
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-12">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <h3 className="text-xl font-semibold mb-4">CRG Toastmasters</h3>
-              <p className="text-gray-400 mb-4">"Where Leaders Are Made"</p>
-              <div className="flex space-x-4">
-                <a href="#" className="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full hover:bg-amber-500 transition-colors">
-                  <i className="ri-facebook-fill"></i>
-                </a>
-                <a href="#" className="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full hover:bg-amber-500 transition-colors">
-                  <i className="ri-twitter-fill"></i>
-                </a>
-                <a href="#" className="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full hover:bg-amber-500 transition-colors">
-                  <i className="ri-linkedin-fill"></i>
-                </a>
-                <a href="#" className="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full hover:bg-amber-500 transition-colors">
-                  <i className="ri-instagram-line"></i>
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">About Toastmasters</a></li>
-                <li><a href="#benefits" className="text-gray-400 hover:text-white transition-colors">Membership Benefits</a></li>
-                <li><a href="#team" className="text-gray-400 hover:text-white transition-colors">Leadership Team</a></li>
-                <li><a href="#meetings" className="text-gray-400 hover:text-white transition-colors">Meeting Schedule</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <div className="w-5 h-5 flex items-center justify-center mr-2 mt-1">
-                    <i className="ri-map-pin-line text-amber-500"></i>
-                  </div>
-                  <span className="text-gray-400">Pramukh Anand Orbit Mall, Kudasan, Gandhinagar</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-5 h-5 flex items-center justify-center mr-2 mt-1">
-                    <i className="ri-mail-line text-amber-500"></i>
-                  </div>
-                  <span className="text-gray-400">crgtoastmasters@gmail.com</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-5 h-5 flex items-center justify-center mr-2 mt-1">
-                    <i className="ri-phone-line text-amber-500"></i>
-                  </div>
-                  <span className="text-gray-400">+91 884 936 0867</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-5 h-5 flex items-center justify-center mr-2 mt-1">
-                    <i className="ri-time-line text-amber-500"></i>
-                  </div>
-                  <span className="text-gray-400">Every Sunday at 11:00 AM</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-700 pt-8 text-center">
-            <p className="text-gray-400">&copy; 2025 CRG Toastmasters Club. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
