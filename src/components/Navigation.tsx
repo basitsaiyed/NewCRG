@@ -5,11 +5,25 @@ import { ImageIcon, Menu, X } from "lucide-react";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   
   // Check if we're on the homepage
   const isHomePage = location.pathname === "/";
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -50,28 +64,28 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-      <div className="container mx-auto px-6 py-3 flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold text-primary">CRG Toastmasters Club</Link>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+        <Link to="/" className="text-2xl font-bold text-amber-600">CRG Toastmasters Club</Link>
         <div className={`md:flex items-center space-x-8 ${isMenuOpen ? 'flex flex-col absolute top-full left-0 w-full bg-white shadow-md p-4 space-y-4 md:space-y-0 md:static md:flex-row md:shadow-none' : 'hidden'}`}>
-          <Link to="/" className="text-gray-700 hover:text-primary transition-colors">Home</Link>
+          <Link to="/" className="text-gray-700 hover:text-amber-500 transition-colors font-medium">Home</Link>
           <a 
             href="#benefits" 
             onClick={(e) => handleAnchorClick(e, 'benefits')} 
-            className="text-gray-700 hover:text-primary transition-colors"
+            className="text-gray-700 hover:text-amber-500 transition-colors font-medium"
           >
             Benefits
           </a>
           <a 
             href="#team" 
             onClick={(e) => handleAnchorClick(e, 'team')} 
-            className="text-gray-700 hover:text-primary transition-colors"
+            className="text-gray-700 hover:text-amber-500 transition-colors font-medium"
           >
             Our Team
           </a>
           <Link 
             to="/gallery" 
-            className="text-gray-700 hover:text-primary transition-colors flex items-center group"
+            className="text-gray-700 hover:text-amber-500 transition-colors flex items-center group font-medium"
           >
             <ImageIcon className="w-4 h-4 mr-1 group-hover:scale-110 transition-transform" />
             <span className="group-hover:translate-x-1 transition-transform">Gallery</span>
@@ -79,13 +93,13 @@ export default function Navigation() {
           <a 
             href="#meetings" 
             onClick={(e) => handleAnchorClick(e, 'meetings')} 
-            className="text-gray-700 hover:text-primary transition-colors"
+            className="text-gray-700 hover:text-amber-500 transition-colors font-medium"
           >
             Meetings
           </a>
         </div>
         <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
-          {isMenuOpen ? <X size={24} className="text-primary" /> : <Menu size={24} className="text-primary" />}
+          {isMenuOpen ? <X size={24} className="text-amber-500" /> : <Menu size={24} className="text-amber-500" />}
         </div>
       </div>
     </nav>
