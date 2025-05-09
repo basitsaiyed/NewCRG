@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Image, Menu, X } from "lucide-react";
+import { ImageIcon, Menu, X } from "lucide-react";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,14 +18,14 @@ export default function Navigation() {
           <Link to="/" className="text-gray-700 hover:text-primary transition-colors">Home</Link>
           <a href="#benefits" className="text-gray-700 hover:text-primary transition-colors">Benefits</a>
           <a href="#team" className="text-gray-700 hover:text-primary transition-colors">Our Team</a>
-          <Link to="/gallery" className="text-gray-700 hover:text-primary transition-colors flex items-center">
-            <Image className="w-4 h-4 mr-1" />
-            Gallery
+          <Link to="/gallery" className="text-gray-700 hover:text-primary transition-colors flex items-center group">
+            <ImageIcon className="w-4 h-4 mr-1 group-hover:scale-110 transition-transform" />
+            <span className="group-hover:translate-x-1 transition-transform">Gallery</span>
           </Link>
           <a href="#meetings" className="text-gray-700 hover:text-primary transition-colors">Meetings</a>
         </div>
         <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMenuOpen ? <X size={24} className="text-primary" /> : <Menu size={24} className="text-primary" />}
         </div>
       </div>
     </nav>
