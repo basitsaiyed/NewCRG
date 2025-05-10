@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import MeetingInfo from "@/components/MeetingInfo";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
+import Map from "@/components/Map";
 import { Button } from "@/components/ui/button";
 import {
   Award,
@@ -222,6 +223,9 @@ const Index = () => {
 
       {/* Meeting Information Section */}
       <MeetingInfo />
+
+      {/* Map Section */}
+      <Map />
 
       {/* CTA section */}
       <CTASection />
