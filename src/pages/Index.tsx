@@ -85,7 +85,7 @@ const Index = () => {
             <div className="md:w-1/2 w-full">
               <div className="relative aspect-[4/3] md:aspect-[16/9]">
                 <img 
-                  src="https://images.unsplash.com/photo-1475721027785-f74ec9c7e14c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" 
+                  src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" 
                   alt="Public speaking event" 
                   className="rounded-lg shadow-xl w-full h-full object-cover"
                 />
