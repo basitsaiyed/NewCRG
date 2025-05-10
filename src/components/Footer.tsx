@@ -39,27 +39,27 @@ const Footer = () => {
 
           <div>
             <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
-            <ul className="space-y-2">
+            <ul className="flex flex-col space-y-3">
               <li className="flex items-start">
-                <div className="w-5 h-5 flex items-center justify-center mr-2 mt-1">
+                <div className="w-5 h-5 flex items-center justify-center mr-3 mt-1">
                   <i className="ri-map-pin-line text-amber-300"></i>
                 </div>
                 <span className="text-amber-200">Pramukh Anand Orbit Mall, Kudasan, Gandhinagar</span>
               </li>
               <li className="flex items-start">
-                <div className="w-5 h-5 flex items-center justify-center mr-2 mt-1">
+                <div className="w-5 h-5 flex items-center justify-center mr-3 mt-1">
                   <i className="ri-mail-line text-amber-300"></i>
                 </div>
                 <span className="text-amber-200">crgtoastmasters@gmail.com</span>
               </li>
               <li className="flex items-start">
-                <div className="w-5 h-5 flex items-center justify-center mr-2 mt-1">
+                <div className="w-5 h-5 flex items-center justify-center mr-3 mt-1">
                   <i className="ri-phone-line text-amber-300"></i>
                 </div>
                 <span className="text-amber-200">+91 884 936 0867</span>
               </li>
               <li className="flex items-start">
-                <div className="w-5 h-5 flex items-center justify-center mr-2 mt-1">
+                <div className="w-5 h-5 flex items-center justify-center mr-3 mt-1">
                   <i className="ri-time-line text-amber-300"></i>
                 </div>
                 <span className="text-amber-200">Every Sunday at 11:00 AM</span>
