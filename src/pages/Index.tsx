@@ -13,6 +13,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import CommitteeMember from "@/components/CommitteeMember";
+import { Link } from "react-router-dom";
 
 // Define a type for the TomTom SDK to fix the error
 declare global {
@@ -78,9 +79,11 @@ const Index = () => {
                 <Button size="lg" className="bg-amber-500 hover:bg-amber-600 text-white w-full sm:w-auto">
                   Visit as a Guest
                 </Button>
-                <Button size="lg" variant="outline" className="border-amber-500 text-amber-500 hover:bg-amber-50 w-full sm:w-auto">
-                  Learn More
-                </Button>
+                <Link to="/gallery">
+                  <Button size="lg" variant="outline" className="border-amber-500 text-amber-500 hover:bg-amber-50 w-full sm:w-auto">
+                    Gallery
+                  </Button>
+                </Link>
               </div>
             </div>
             <div className="md:w-1/2 w-full">
