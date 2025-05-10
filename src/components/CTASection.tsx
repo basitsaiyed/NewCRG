@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const CTASection = () => {
   return (
@@ -11,9 +12,11 @@ const CTASection = () => {
           <p className="text-xl mb-8">
             Visit us as a guest with no obligation. Experience firsthand how Toastmasters can help you become a confident speaker and leader.
           </p>
-          <Button size="lg" className="bg-white text-amber-600 hover:bg-gray-100">
-            Visit as a Guest
-          </Button>
+          <Link to="#meetings">
+            <Button size="lg" className="bg-white text-amber-600 hover:bg-gray-100">
+              Visit as a Guest
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
