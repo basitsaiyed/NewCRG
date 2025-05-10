@@ -60,7 +60,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section id="home" className="pt-24 py-16 md:py-24 bg-amber-50">
         <div className="container mx-auto px-6">
@@ -75,12 +75,15 @@ const Index = () => {
               <p className="text-lg text-gray-600">
                 Join our supportive community where you'll develop communication and leadership skills in a positive, feedback-rich environment.
               </p>
+              <p className="text-lg text-gray-600">
+                Whether you're a beginner or an experienced speaker, Toastmasters is the place for you to grow.
+              </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-amber-500 hover:bg-amber-600 text-white w-full sm:w-auto">
+                {/* <span className="inline-block px-5 py-2 rounded-full bg-amber-100 text-amber-700 font-semibold text-lg shadow-sm hover:bg-amber-500 hover:text-white transition-all duration-300 cursor-pointer">
                   Visit as a Guest
-                </Button>
+                </span><br /> */}
                 <Link to="/gallery">
-                  <Button size="lg" variant="outline" className="border-amber-500 text-amber-500 hover:bg-amber-50 w-full sm:w-auto">
+                  <Button size="lg" className="bg-amber-500 hover:bg-amber-600 text-white w-full sm:w-auto">
                     Gallery
                   </Button>
                 </Link>
@@ -88,9 +91,9 @@ const Index = () => {
             </div>
             <div className="md:w-1/2 w-full">
               <div className="relative aspect-[4/3] md:aspect-[16/9]">
-                <img 
-                  src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" 
-                  alt="Public speaking event" 
+                <img
+                  src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                  alt="Public speaking event"
                   className="rounded-lg shadow-xl w-full h-full object-cover"
                 />
               </div>
@@ -108,7 +111,7 @@ const Index = () => {
               Toastmasters provides a supportive and positive learning environment where members develop communication and leadership skills.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
               <div className="bg-amber-100 text-amber-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
@@ -119,7 +122,7 @@ const Index = () => {
                 Overcome fear of public speaking and develop confidence through regular practice in a supportive environment.
               </p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
               <div className="bg-amber-100 text-amber-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Users className="h-6 w-6" />
@@ -129,7 +132,7 @@ const Index = () => {
                 Take on club roles and leadership positions to develop valuable skills for your career and personal life.
               </p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
               <div className="bg-amber-100 text-amber-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <BookOpen className="h-6 w-6" />
@@ -139,7 +142,7 @@ const Index = () => {
                 Follow Toastmasters' proven program at your own pace with clear goals and achievements to celebrate.
               </p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
               <div className="bg-amber-100 text-amber-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Award className="h-6 w-6" />
@@ -149,7 +152,7 @@ const Index = () => {
                 Develop skills that are highly valued in the workplace, from presentation skills to effective meetings.
               </p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
               <div className="bg-amber-100 text-amber-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Users className="h-6 w-6" />
@@ -159,7 +162,7 @@ const Index = () => {
                 Connect with diverse professionals from different industries and backgrounds in your community.
               </p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
               <div className="bg-amber-100 text-amber-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <MessageCircle className="h-6 w-6" />
@@ -182,39 +185,39 @@ const Index = () => {
               Meet our dedicated team who work together to make our club a thriving and supportive community.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <CommitteeMember 
+            <CommitteeMember
               name="Sarah Johnson"
               role="President"
               imageUrl="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
               bio="Sarah leads our club with passion and dedication, ensuring every member develops their skills."
             />
-            <CommitteeMember 
+            <CommitteeMember
               name="Michael Chen"
               role="Vice President Education"
               imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80"
               bio="Michael oversees our educational program and helps members progress through their speaking journeys."
             />
-            <CommitteeMember 
+            <CommitteeMember
               name="Jessica Rodriguez"
               role="Vice President Membership"
               imageUrl="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1061&q=80"
               bio="Jessica welcomes new members and ensures they feel at home in our supportive community."
             />
-            <CommitteeMember 
+            <CommitteeMember
               name="David Patel"
               role="Vice President Public Relations"
               imageUrl="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
               bio="David promotes our club and builds relationships with the local community."
             />
-            <CommitteeMember 
+            <CommitteeMember
               name="Emma Wilson"
               role="Secretary"
               imageUrl="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
               bio="Emma keeps our records organized and ensures smooth communication within the club."
             />
-            <CommitteeMember 
+            <CommitteeMember
               name="Robert Kim"
               role="Treasurer"
               imageUrl="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
