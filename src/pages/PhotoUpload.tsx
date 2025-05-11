@@ -111,34 +111,48 @@ const PhotoUpload = () => {
     setUploading(true);
 
     try {
-      // Upload photos with error handling
+      // Upload photos
       const photoUploads = Array.from(data.photos).map(async (file) => {
-        try {
-          return await uploadImage(file);
-        } catch (error) {
-          console.error('Failed to upload image:', file.name, error);
-          throw new Error(`Failed to upload ${file.name}: ${error.message}`);
-        }
+        return await uploadImage(file);
       });
-
       const photoResults = await Promise.all(photoUploads);
       const photoUrls = photoResults.map(photo => photo.secure_url);
 
       // Upload thumbnail
       let thumbnailUrl = '';
       if (data.thumbnail?.[0]) {
-        try {
-          const thumbnailResult = await uploadImage(data.thumbnail[0]);
-          thumbnailUrl = thumbnailResult.secure_url;
-        } catch (error) {
-          console.error('Thumbnail upload failed:', error);
-          throw new Error(`Thumbnail upload failed: ${error.message}`);
-        }
+        const thumbnailResult = await uploadImage(data.thumbnail[0]);
+        thumbnailUrl = thumbnailResult.secure_url;
       }
 
-      // Rest of your code...
+      // Missing API call to save data
+      const response = await fetch('/.netlify/functions/saveGallery', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: data.title,
+          date: data.date,
+          meetingType: data.meetingType,
+          tags: data.tags ? data.tags.split(',') : [],
+          description: data.description,
+          photos: photoUrls,
+          thumbnail: thumbnailUrl || photoUrls[0]
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save event data');
+      }
+
+      toast.success("Upload successful!");
+      form.reset();
+      setPhotoPreviewUrls([]);
+      setThumbnailPreviewUrl(null);
+
     } catch (error) {
-      console.error("Full upload error:", error);
+      console.error("Upload error:", error);
       toast.error(`Upload failed: ${error.message}`);
     } finally {
       setUploading(false);
