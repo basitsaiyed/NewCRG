@@ -16,9 +16,9 @@ type EventItem = {
   id: string | number;
   title: string;
   date: string;
-  imageUrl: string;
-  description?: string;
+  thumbnail: string;  // Changed from imageUrl to thumbnail
   photos: Photo[];
+  description?: string;
 };
 
 interface GalleryCategoryProps {
@@ -111,7 +111,7 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
             <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300">
               <div className="aspect-video w-full overflow-hidden relative">
                 <motion.img 
-                  src={event.imageUrl} 
+                  src={event.thumbnail} 
                   alt={event.title}
                   className="w-full h-full object-cover"
                   whileHover={{ scale: 1.05 }}
