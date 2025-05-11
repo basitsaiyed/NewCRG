@@ -92,7 +92,7 @@ const Index = () => {
             <div className="md:w-1/2 w-full">
               <div className="relative aspect-[4/3] md:aspect-[16/9]">
                 <img
-                  src="https://www.pngwing.com/en/search?q=toastmasters+International"
+                  src="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746984053/upscalemedia-transformed_wj7d4b.png"
                   alt="Toastmasters International"
                   className="rounded-lg shadow-xl w-full h-full object-cover"
                 />
