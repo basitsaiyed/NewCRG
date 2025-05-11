@@ -27,6 +27,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { uploadImage } from "@/lib/cloudinary";
+
 
 const formSchema = z.object({
   title: z.string().min(2, { message: "Title must be at least 2 characters." }),
@@ -43,14 +45,14 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 // Mock implementation of uploadImage function
-const uploadImage = async (file: File) => {
-  // Simulate an API call to upload the image
-  return new Promise<{ secure_url: string }>((resolve) => {
-    setTimeout(() => {
-      resolve({ secure_url: URL.createObjectURL(file) });
-    }, 1000);
-  });
-};
+// const uploadImage = async (file: File) => {
+//   // Simulate an API call to upload the image
+//   return new Promise<{ secure_url: string }>((resolve) => {
+//     setTimeout(() => {
+//       resolve({ secure_url: URL.createObjectURL(file) });
+//     }, 1000);
+//   });
+// };
 
 const PhotoUpload = () => {
   const [uploading, setUploading] = useState(false);
@@ -106,56 +108,42 @@ const PhotoUpload = () => {
   };
 
   const onSubmit = async (data: FormValues) => {
-  setUploading(true);
-  
-  try {
-    // Upload photos
-    const photoUploads = Array.from(data.photos).map(file => uploadImage(file));
-    const photoResults = await Promise.all(photoUploads);
-    const photoUrls = photoResults.map(photo => photo.secure_url);
+    setUploading(true);
 
-    // Upload thumbnail if exists
-    let thumbnailUrl = '';
-    if (data.thumbnail?.[0]) {
-      const thumbnailResult = await uploadImage(data.thumbnail[0]);
-      thumbnailUrl = thumbnailResult.secure_url;
+    try {
+      // Upload photos with error handling
+      const photoUploads = Array.from(data.photos).map(async (file) => {
+        try {
+          return await uploadImage(file);
+        } catch (error) {
+          console.error('Failed to upload image:', file.name, error);
+          throw new Error(`Failed to upload ${file.name}: ${error.message}`);
+        }
+      });
+
+      const photoResults = await Promise.all(photoUploads);
+      const photoUrls = photoResults.map(photo => photo.secure_url);
+
+      // Upload thumbnail
+      let thumbnailUrl = '';
+      if (data.thumbnail?.[0]) {
+        try {
+          const thumbnailResult = await uploadImage(data.thumbnail[0]);
+          thumbnailUrl = thumbnailResult.secure_url;
+        } catch (error) {
+          console.error('Thumbnail upload failed:', error);
+          throw new Error(`Thumbnail upload failed: ${error.message}`);
+        }
+      }
+
+      // Rest of your code...
+    } catch (error) {
+      console.error("Full upload error:", error);
+      toast.error(`Upload failed: ${error.message}`);
+    } finally {
+      setUploading(false);
     }
-
-    // Prepare data for saving
-    const formData = {
-      title: data.title,
-      date: data.date,
-      meetingType: data.meetingType,
-      tags: data.tags ? data.tags.split(',') : [],
-      description: data.description || '',
-      photos: photoUrls,
-      thumbnail: thumbnailUrl || photoUrls[0],
-    };
-
-    // Save to Netlify Function
-    const response = await fetch('/.netlify/functions/saveGallery', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to save data');
-    }
-
-    toast.success("Photos uploaded successfully!");
-    form.reset();
-    setPhotoPreviewUrls([]);
-    setThumbnailPreviewUrl(null);
-  } catch (error) {
-    console.error("Upload error:", error);
-    toast.error("Failed to upload photos. Please try again.");
-  } finally {
-    setUploading(false);
-  }
-};
+  };
 
   return (
     <div className="min-h-screen bg-amber-50/30">
