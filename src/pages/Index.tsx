@@ -90,13 +90,13 @@ const Index = () => {
               </div>
             </div>
             <div className="md:w-1/2 w-full">
-              <div className="relative aspect-[4/3] md:aspect-[16/9]">
+{/*               <div className="relative aspect-[4/3] md:aspect-[16/9]">
                 <img
                   src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
                   alt="Public speaking event"
                   className="rounded-lg shadow-xl w-full h-full object-cover"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -196,7 +196,7 @@ const Index = () => {
             <CommitteeMember
               name="Megha Bhatt"
               role="Vice President Education"
-              imageUrl="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746981759/Megha_pimuy1.jpg"
+              imageUrl="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746982914/megha2_xfze49.jpg"
               bio="Megha oversees our educational program and helps members progress through their speaking journeys."
             />
             <CommitteeMember
@@ -220,13 +220,13 @@ const Index = () => {
             <CommitteeMember
               name="Shrimohan"
               role="Treasurer"
-              imageUrl="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746981757/shrimohan_fxldmi.jpg"
+              imageUrl="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746983343/wmremove-transformed_tgw8tp.jpg"
               bio="Shrimohan manages our finances and ensures we have the resources needed for club activities."
             />
             <CommitteeMember
               name="Saurav Asija"
               role="Sergeant at Arms"
-              imageUrl="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746978963/rbmyhmhxhx9mwrmpgb2y.jpg"
+              imageUrl="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746983615/1746983505540_1_kevjhq.jpg"
               bio="Saurav Keeps track of the club's physical properties and ensures a positive meeting environment."
             />
           </div>
