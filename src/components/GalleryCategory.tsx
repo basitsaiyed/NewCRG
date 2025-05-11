@@ -16,9 +16,14 @@ type EventItem = {
   id: string | number;
   title: string;
   date: string;
-  thumbnail: string;  // Changed from imageUrl to thumbnail
+  thumbnail: string;
   photos: Photo[];
   description?: string;
+  tags?: string[];
+};
+
+const addDefaultImage = (e: React.SyntheticEvent<HTMLImageElement>) => {
+  e.currentTarget.src = '/fallback-image.jpg';
 };
 
 interface GalleryCategoryProps {
@@ -42,8 +47,8 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
 
   const item = {
     hidden: { opacity: 0, y: 20 },
-    show: { 
-      opacity: 1, 
+    show: {
+      opacity: 1,
       y: 0,
       transition: {
         ease: "easeOut",
@@ -54,23 +59,32 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
 
   const imageVariants = {
     hidden: { opacity: 0, scale: 0.95 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       scale: 1,
       transition: { duration: 0.4, ease: "easeOut" }
     },
-    exit: { 
+    exit: {
       opacity: 0,
       scale: 0.95,
       transition: { duration: 0.2, ease: "easeIn" }
     }
   };
 
+  const formatDate = (isoString: string) => {
+    const date = new Date(isoString);
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }).format(date);
+  };
+
   const handlePreviousPhoto = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!selectedEvent) return;
-    
-    setCurrentPhotoIndex((prev) => 
+
+    setCurrentPhotoIndex((prev) =>
       prev === 0 ? selectedEvent.photos.length - 1 : prev - 1
     );
   };
@@ -78,8 +92,8 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
   const handleNextPhoto = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!selectedEvent) return;
-    
-    setCurrentPhotoIndex((prev) => 
+
+    setCurrentPhotoIndex((prev) =>
       prev === selectedEvent.photos.length - 1 ? 0 : prev + 1
     );
   };
@@ -91,7 +105,7 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
 
   return (
     <>
-      <motion.div 
+      <motion.div
         variants={container}
         initial="hidden"
         animate="show"
@@ -110,8 +124,8 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
           >
             <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300">
               <div className="aspect-video w-full overflow-hidden relative">
-                <motion.img 
-                  src={event.thumbnail} 
+                <motion.img
+                  src={event.thumbnail}
                   alt={event.title}
                   className="w-full h-full object-cover"
                   whileHover={{ scale: 1.05 }}
@@ -123,7 +137,7 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
                   </div>
                 )}
               </div>
-              <motion.div 
+              <motion.div
                 className="p-4"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -132,7 +146,7 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
                 <h3 className="font-bold text-lg text-gray-900">{event.title}</h3>
                 <div className="flex items-center text-sm text-gray-500 mt-1">
                   <Calendar className="h-4 w-4 mr-1" />
-                  {event.date}
+                  {formatDate(event.date)}
                 </div>
               </motion.div>
             </div>
@@ -188,7 +202,7 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
             </div>
 
             {/* Thumbnails and Info Sidebar */}
-            <motion.div 
+            <motion.div
               className="w-full md:w-72 bg-white/90 p-4 overflow-hidden flex flex-col"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -205,7 +219,7 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
 
               <ScrollArea className="flex-1">
                 <div className="grid grid-cols-3 gap-2">
-                  {selectedEvent?.photos.map((photo, index) => (
+                  {selectedEvent?.photos.map((photoUrl, index) => (
                     <motion.div
                       key={index}
                       className={cn(
@@ -217,7 +231,8 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
                       transition={{ duration: 0.2 }}
                     >
                       <img
-                        src={photo.image_url}
+                        src={photoUrl.image_url}
+                        onError={addDefaultImage}
                         alt={`Thumbnail ${index + 1}`}
                         className="w-full h-full object-cover"
                       />
@@ -226,7 +241,7 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
                 </div>
 
                 {selectedEvent?.photos[currentPhotoIndex]?.description && (
-                  <motion.p 
+                  <motion.p
                     className="text-sm text-gray-600 mt-4 italic"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
