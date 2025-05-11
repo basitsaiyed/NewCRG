@@ -1,4 +1,8 @@
 export const uploadImage = async (file: File) => {
+  console.log('Cloudinary Config:', {
+    cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    uploadPreset: process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+  });
   const formData = new FormData();
   formData.append('file', file);
   formData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!);
