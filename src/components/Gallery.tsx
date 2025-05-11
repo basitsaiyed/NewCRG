@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import GalleryCategory from "./GalleryCategory";
+import { EventItem } from "@/types/gallery";
 
 type Photo = {
   image_url: string;
   description?: string;
 };
 
-type EventItem = {
-  id: string;
-  title: string;
-  date: string;
-  thumbnail: string;
-  photos: Photo[];
-  meetingType: string;
-  tags: string[];
-  description?: string;
-};
 
 export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState("all");
