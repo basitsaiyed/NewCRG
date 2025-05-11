@@ -6,21 +6,22 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { EventItem } from "@/types/gallery";
 
 type Photo = {
   image_url: string;
   description?: string;
 };
 
-type EventItem = {
-  id: string | number;
-  title: string;
-  date: string;
-  thumbnail: string;
-  photos: Photo[];
+interface GalleryCategoryProps {
+  photos: EventItem[];
+}
+
+type PhotoWithDescription = {
+  url: string;
   description?: string;
-  tags?: string[];
 };
+
 
 const addDefaultImage = (e: React.SyntheticEvent<HTMLImageElement>) => {
   e.currentTarget.src = '/fallback-image.jpg';
@@ -146,7 +147,7 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
                 <h3 className="font-bold text-lg text-gray-900">{event.title}</h3>
                 <div className="flex items-center text-sm text-gray-500 mt-1">
                   <Calendar className="h-4 w-4 mr-1" />
-                  {formatDate(event.date)}
+                  {selectedEvent && formatDate(selectedEvent.date)}
                 </div>
               </motion.div>
             </div>
@@ -162,13 +163,12 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
               {selectedEvent?.photos[currentPhotoIndex] && (
                 <motion.img
                   key={currentPhotoIndex}
-                  src={selectedEvent.photos[currentPhotoIndex].image_url}
-                  alt={selectedEvent.title}
+                  src={selectedEvent.photos[currentPhotoIndex]}
+                  alt={`${selectedEvent.title} - Photo ${currentPhotoIndex + 1}`}
                   className="max-w-full max-h-full object-contain"
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  variants={imageVariants}
+                  onError={(e) => {
+                    e.currentTarget.src = '/fallback-image.jpg';
+                  }}
                 />
               )}
 
@@ -227,20 +227,20 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
                         currentPhotoIndex === index ? "border-primary" : "border-transparent"
                       )}
                       onClick={() => setCurrentPhotoIndex(index)}
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.2 }}
                     >
                       <img
-                        src={photoUrl.image_url}
-                        onError={addDefaultImage}
+                        src={photoUrl}
                         alt={`Thumbnail ${index + 1}`}
                         className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = '/fallback-image.jpg';
+                        }}
                       />
                     </motion.div>
                   ))}
                 </div>
 
-                {selectedEvent?.photos[currentPhotoIndex]?.description && (
+                {selectedEvent?.photos[currentPhotoIndex] ? (
                   <motion.p
                     className="text-sm text-gray-600 mt-4 italic"
                     initial={{ opacity: 0 }}
@@ -248,9 +248,9 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
                     key={currentPhotoIndex}
                     transition={{ duration: 0.3, delay: 0.1 }}
                   >
-                    {selectedEvent.photos[currentPhotoIndex].description}
+                    {selectedEvent.photos[currentPhotoIndex]}
                   </motion.p>
-                )}
+                ) : null}
               </ScrollArea>
             </motion.div>
           </div>
