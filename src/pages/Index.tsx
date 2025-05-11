@@ -188,40 +188,46 @@ const Index = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <CommitteeMember
-              name="Sarah Johnson"
+              name="Prakhar Verma"
               role="President"
-              imageUrl="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
-              bio="Sarah leads our club with passion and dedication, ensuring every member develops their skills."
+              imageUrl="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746981758/Prakhar_dyrg31.jpg"
+              bio="Prakhar leads our club with passion and dedication, ensuring every member develops their skills."
             />
             <CommitteeMember
-              name="Michael Chen"
+              name="Megha Bhatt"
               role="Vice President Education"
-              imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80"
-              bio="Michael oversees our educational program and helps members progress through their speaking journeys."
+              imageUrl="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746981759/Megha_pimuy1.jpg"
+              bio="Megha oversees our educational program and helps members progress through their speaking journeys."
             />
             <CommitteeMember
-              name="Jessica Rodriguez"
+              name="Harsh Rawell"
               role="Vice President Membership"
-              imageUrl="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1061&q=80"
-              bio="Jessica welcomes new members and ensures they feel at home in our supportive community."
+              imageUrl="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746981758/Harsh_llaxkb.jpg"
+              bio="Harsh welcomes new members and ensures they feel at home in our supportive community."
             />
             <CommitteeMember
-              name="David Patel"
+              name="Arun"
               role="Vice President Public Relations"
-              imageUrl="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-              bio="David promotes our club and builds relationships with the local community."
+              imageUrl="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746981758/Arun_vludv2.jpg"
+              bio="Arun promotes our club and builds relationships with the local community."
             />
             <CommitteeMember
-              name="Emma Wilson"
+              name="Pranita"
               role="Secretary"
-              imageUrl="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
-              bio="Emma keeps our records organized and ensures smooth communication within the club."
+              imageUrl="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746981757/Pranita_lqliow.jpg"
+              bio="Pranita keeps our records organized and ensures smooth communication within the club."
             />
             <CommitteeMember
-              name="Robert Kim"
+              name="Shrimohan"
               role="Treasurer"
-              imageUrl="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-              bio="Robert manages our finances and ensures we have the resources needed for club activities."
+              imageUrl="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746981757/shrimohan_fxldmi.jpg"
+              bio="Shrimohan manages our finances and ensures we have the resources needed for club activities."
+            />
+            <CommitteeMember
+              name="Saurav Asija"
+              role="Sergeant at Arms"
+              imageUrl="https://res.cloudinary.com/dtn8ucfqp/image/upload/v1746978963/rbmyhmhxhx9mwrmpgb2y.jpg"
+              bio="Saurav Keeps track of the club's physical properties and ensures a positive meeting environment."
             />
           </div>
         </div>
