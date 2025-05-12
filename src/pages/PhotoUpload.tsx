@@ -264,7 +264,7 @@ const PhotoUpload = () => {
                           <Input
                             className="pl-10"  // Add padding to prevent overlap
                             id="tags-input"    // Add ID for label association
-                            placeholder="e.g. table-topics, leadership, evaluation (comma separated)"
+                            placeholder="&nbsp;&nbsp;&nbsp; e.g. table-topics, leadership, evaluation (comma separated)"
                             {...field}
                           />
                           <label
@@ -419,7 +419,7 @@ const PhotoUpload = () => {
                   <div className="pt-4">
                     <Button
                       type="submit"
-                      className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-11 rounded-md px-8 bg-amber-500 hover:bg-amber-600 text-white w-full sm:w-auto"
+                      className="w-full inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-11 rounded-md px-8 bg-amber-500 hover:bg-amber-600 text-white w-full sm:w-auto"
                       disabled={uploading}
                     >
                       {uploading ? "Uploading..." : "Upload Photos"}
