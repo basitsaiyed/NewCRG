@@ -207,8 +207,15 @@ const PhotoUpload = () => {
                               <Input
                                 type="date"
                                 className="pl-10"
+                                id="date-input"
                                 {...field}
                               />
+                              <label
+                                htmlFor="date-input"  // Associate label with input
+                                className="absolute left-3 top-1/2 -translate-y-1/2"
+                              >
+                              <CalendarDays className="h-4 w-4 text-gray-500" />
+                              </label>
                             </div>
                           </FormControl>
                           <FormMessage />
@@ -254,13 +261,19 @@ const PhotoUpload = () => {
                         <FormLabel>Tags</FormLabel>
                         <FormControl>
                           <div className="relative">
-                            <Tags className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
-                            <Input
-                              className="pl-10"
-                              placeholder="e.g. table-topics, leadership, evaluation (comma separated)"
-                              {...field}
-                            />
-                          </div>
+                          <Input
+                            className="pl-10"  // Add padding to prevent overlap
+                            id="tags-input"    // Add ID for label association
+                            placeholder="e.g. table-topics, leadership, evaluation (comma separated)"
+                            {...field}
+                          />
+                          <label
+                            htmlFor="tags-input"  // Associate label with input
+                            className="absolute left-3 top-1/2 -translate-y-1/2"
+                          >
+                            <Tags className="h-4 w-4 text-gray-500" />
+                          </label>
+                        </div>
                         </FormControl>
                         <FormDescription>
                           Add relevant tags separated by commas
