@@ -80,6 +80,21 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
       day: 'numeric',
     }).format(date);
   };
+    const getFullPhotoCollection = (event: EventItem) => {
+    // Create a new array with thumbnail as the first photo, followed by other photos
+    const allPhotos = [event.thumbnail, ...(event.photos || [])];
+    // Remove duplicates in case thumbnail is already in photos array
+    return [...new Set(allPhotos)];
+  };
+    const handleEventClick = (event: EventItem) => {
+    // Create modified event with combined photos
+    const modifiedEvent = {
+      ...event,
+      photos: getFullPhotoCollection(event)
+    };
+    setSelectedEvent(modifiedEvent);
+    setCurrentPhotoIndex(0);
+  };
 
   const handlePreviousPhoto = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -118,10 +133,7 @@ export default function GalleryCategory({ photos }: GalleryCategoryProps) {
             variants={item}
             whileHover={{ y: -8, transition: { duration: 0.2 } }}
             className="group cursor-pointer"
-            onClick={() => {
-              setSelectedEvent(event);
-              setCurrentPhotoIndex(0);
-            }}
+            onClick={() => handleEventClick(event)}
           >
             <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300">
               <div className="aspect-video w-full overflow-hidden relative">
