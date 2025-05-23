@@ -3,6 +3,10 @@ const axios = require('axios');
 const heicConvert = require('heic-convert');
 
 exports.handler = async (event) => {
+  // Set timeout for axios requests
+  const AXIOS_TIMEOUT = 8000;
+  const MAX_RETRIES = 2;
+
   const supabase = createClient(
     process.env.SUPABASE_URL,
     process.env.SUPABASE_KEY
@@ -10,45 +14,62 @@ exports.handler = async (event) => {
 
   try {
     const data = JSON.parse(event.body);
-
-    // Transform data to match database schema
     const insertData = {
       title: data.title,
       date: new Date(data.date).toISOString(),
       meetingType: data.meetingType,
       description: data.description,
       tags: data.tags || [],
-      photos: data.photos, // Keep original URLs
+      photos: data.photos,
       thumbnail: data.thumbnail
     };
 
-    // Handle HEIC images
-    if (insertData.photos && insertData.photos.length > 0) {
-      const convertedPhotos = await Promise.all(
-        insertData.photos.map(async (photoUrl) => {
-          if (photoUrl.toLowerCase().endsWith('.heic')) {
-            try {
-              // Fetch the image data from Cloudinary
-              const response = await axios.get(photoUrl, { responseType: 'arraybuffer' });
-              const imageBuffer = Buffer.from(response.data);
+    // Process photos in smaller batches
+    if (insertData.photos?.length > 0) {
+      const batchSize = 3;
+      const convertedPhotos = [];
+      
+      for (let i = 0; i < insertData.photos.length; i += batchSize) {
+        const batch = insertData.photos.slice(i, i + batchSize);
+        const batchPromises = batch.map(async (photoUrl) => {
+          if (!photoUrl.toLowerCase().endsWith('.heic')) {
+            return photoUrl;
+          }
 
-              // Convert HEIC to JPEG
-              const jpegBuffer = await heicConvert({
-                buffer: imageBuffer,
-                format: 'JPEG',
-                quality: 0.9
+          for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+            try {
+              const response = await axios.get(photoUrl, {
+                responseType: 'arraybuffer',
+                timeout: AXIOS_TIMEOUT
               });
 
-              // Generate new URL for converted image
+              // Skip large images
+              if (response.data.length > 5000000) { // 5MB limit
+                console.warn('Image too large:', photoUrl);
+                return photoUrl;
+              }
+
+              const jpegBuffer = await heicConvert({
+                buffer: Buffer.from(response.data),
+                format: 'JPEG',
+                quality: 0.8 // Reduced quality for faster processing
+              });
+
               return photoUrl.replace('.heic', '.jpg');
             } catch (error) {
-              console.error('HEIC conversion error:', error);
-              return photoUrl; // Return original URL if conversion fails
+              if (attempt === MAX_RETRIES - 1) {
+                console.error('HEIC conversion failed:', error);
+                return photoUrl;
+              }
             }
           }
-          return photoUrl; // Return non-HEIC URLs as-is
-        })
-      );
+          return photoUrl;
+        });
+
+        const batchResults = await Promise.all(batchPromises);
+        convertedPhotos.push(...batchResults);
+      }
+      
       insertData.photos = convertedPhotos;
     }
 
@@ -57,19 +78,22 @@ exports.handler = async (event) => {
       .insert([insertData])
       .select();
 
-    if (error) {
-      console.error('Supabase error:', error);
-      throw new Error(`Database error: ${error.message}`);
-    }
+    if (error) throw error;
 
     return {
       statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(result[0])
     };
   } catch (error) {
-    console.error('Global error:', error);
+    console.error('Function error:', error);
     return {
       statusCode: 500,
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         error: error.message,
         details: error.details || null
