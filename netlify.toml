@@ -10,7 +10,7 @@
 
 [functions]
   node_bundler = "esbuild"
-  external_node_modules = ["heic-convert"]
+  external_node_modules = ["heic-convert", "cloudinary"]
   included_files = ["node_modules/heic-convert/**/*"]
 
 [functions.processImages]
@@ -18,3 +18,8 @@
 
 [functions.saveGallery]
   timeout = 10
+
+[functions.processImages.environment]
+  CLOUDINARY_CLOUD_NAME = "dtn8ucfqp"
+  CLOUDINARY_API_KEY = "744838263679319"
+  CLOUDINARY_API_SECRET = "Wwro_3-wpEa2UQuHTlDVikgX_5E"

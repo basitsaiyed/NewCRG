@@ -77,16 +77,22 @@ const PhotoUpload = () => {
     setPhotoPreviewUrls([]);
 
     // Create new previews
-    const newPreviews: string[] = [];
-    Array.from(files).forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        if (e.target?.result) {
-          newPreviews.push(e.target.result as string);
-          setPhotoPreviewUrls([...newPreviews]);
-        }
-      };
-      reader.readAsDataURL(file);
+    const fileArray = Array.from(files);
+    const previewPromises = fileArray.map(file => {
+      return new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          if (e.target?.result) {
+            resolve(e.target.result as string);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+
+    // Update previews when all files are read
+    Promise.all(previewPromises).then(previews => {
+      setPhotoPreviewUrls(previews);
     });
   };
 

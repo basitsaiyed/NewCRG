@@ -1,5 +1,13 @@
 const axios = require('axios');
 const heicConvert = require('heic-convert');
+const cloudinary = require('cloudinary').v2;
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 exports.handler = async (event) => {
   const AXIOS_TIMEOUT = 8000;
@@ -17,49 +25,44 @@ exports.handler = async (event) => {
       };
     }
 
-    const batchSize = 3;
-    const convertedPhotos = [];
-    
-    for (let i = 0; i < photos.length; i += batchSize) {
-      const batch = photos.slice(i, i + batchSize);
-      const batchPromises = batch.map(async (photoUrl) => {
+    const convertedPhotos = await Promise.all(
+      photos.map(async (photoUrl) => {
         if (!photoUrl.toLowerCase().endsWith('.heic')) {
+          // Already browser-friendly
           return photoUrl;
         }
-
         for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
           try {
-            const response = await axios.get(photoUrl, {
-              responseType: 'arraybuffer',
-              timeout: AXIOS_TIMEOUT
-            });
-
-            // Skip large images
-            if (response.data.length > 5000000) { // 5MB limit
-              console.warn('Image too large:', photoUrl);
-              return photoUrl;
-            }
-
+            // Download the HEIC file
+            const response = await axios.get(photoUrl, { responseType: 'arraybuffer', timeout: AXIOS_TIMEOUT });
+            // Convert to JPEG
             const jpegBuffer = await heicConvert({
               buffer: Buffer.from(response.data),
               format: 'JPEG',
               quality: 0.8
             });
-
-            return photoUrl.replace('.heic', '.jpg');
+            // Upload the JPEG to Cloudinary
+            const uploadResult = await new Promise((resolve, reject) => {
+              cloudinary.uploader.upload_stream(
+                { resource_type: 'image', format: 'jpg', quality: 'auto' },
+                (error, result) => {
+                  if (error) reject(error);
+                  else resolve(result);
+                }
+              ).end(jpegBuffer);
+            });
+            // Return the JPEG URL
+            return uploadResult.secure_url;
           } catch (error) {
             if (attempt === MAX_RETRIES - 1) {
-              console.error('HEIC conversion failed:', error);
-              return photoUrl;
+              console.error('HEIC conversion/upload failed:', error);
+              return photoUrl; // fallback to original if all attempts fail
             }
           }
         }
         return photoUrl;
-      });
-
-      const batchResults = await Promise.all(batchPromises);
-      convertedPhotos.push(...batchResults);
-    }
+      })
+    );
 
     return {
       statusCode: 200,
