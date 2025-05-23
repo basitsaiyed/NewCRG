@@ -124,7 +124,24 @@ const PhotoUpload = () => {
         thumbnailUrl = thumbnailResult.secure_url;
       }
 
-      // Missing API call to save data
+      // Process images first
+      const processResponse = await fetch('/.netlify/functions/processImages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          photos: photoUrls
+        }),
+      });
+
+      if (!processResponse.ok) {
+        throw new Error('Failed to process images');
+      }
+
+      const { photos: processedPhotos } = await processResponse.json();
+
+      // Save to database
       const response = await fetch('/.netlify/functions/saveGallery', {
         method: 'POST',
         headers: {
@@ -136,8 +153,8 @@ const PhotoUpload = () => {
           meetingType: data.meetingType,
           tags: data.tags ? data.tags.split(',') : [],
           description: data.description,
-          photos: photoUrls,
-          thumbnail: thumbnailUrl || photoUrls[0]
+          photos: processedPhotos,
+          thumbnail: thumbnailUrl || processedPhotos[0]
         }),
       });
 

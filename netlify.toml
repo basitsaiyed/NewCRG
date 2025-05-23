@@ -13,5 +13,8 @@
   external_node_modules = ["heic-convert"]
   included_files = ["node_modules/heic-convert/**/*"]
 
-[functions.saveGallery]
+[functions.processImages]
   timeout = 30
+
+[functions.saveGallery]
+  timeout = 10
