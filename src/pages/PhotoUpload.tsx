@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -311,7 +310,7 @@ const PhotoUpload = () => {
                                     <span className="font-semibold">Click to upload photos</span> or drag and drop
                                   </p>
                                   <p className="text-xs text-gray-500">
-                                    PNG, JPG or WEBP (MAX. 10MB each)
+                                    PNG, JPG, WEBP or HEIC (MAX. 10MB each)
                                   </p>
                                 </div>
                                 <input
@@ -319,7 +318,7 @@ const PhotoUpload = () => {
                                   type="file"
                                   className="hidden"
                                   multiple
-                                  accept="image/png,image/jpeg,image/webp"
+                                  accept="image/png,image/jpeg,image/webp,image/heic"
                                   onChange={(e) => {
                                     onChange(e.target.files);
                                     handlePhotoChange(e);
@@ -371,14 +370,14 @@ const PhotoUpload = () => {
                                     <span className="font-semibold">Select a thumbnail</span> for this event
                                   </p>
                                   <p className="text-xs text-gray-500">
-                                    This will be the main image shown in galleries
+                                    PNG, JPG, WEBP or HEIC (MAX. 10MB each)
                                   </p>
                                 </div>
                                 <input
                                   id="thumbnail-upload"
                                   type="file"
                                   className="hidden"
-                                  accept="image/png,image/jpeg,image/webp"
+                                  accept="image/png,image/jpeg,image/webp,image/heic"
                                   onChange={(e) => {
                                     onChange(e.target.files);
                                     handleThumbnailChange(e);

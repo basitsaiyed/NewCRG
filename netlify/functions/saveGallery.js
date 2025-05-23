@@ -1,4 +1,6 @@
 const { createClient } = require('@supabase/supabase-js');
+const sharp = require('sharp');
+const heic2any = require('heic-convert');
 
 exports.handler = async (event) => {
   const supabase = createClient(
@@ -26,6 +28,30 @@ exports.handler = async (event) => {
     };
 
     console.log('Transformed data:', JSON.stringify(insertData, null, 2));
+
+    // Convert HEIC images to JPEG
+    async function convertHeicToJpeg(buffer, file) {
+      if (file.type === 'image/heic' || file.type === 'image/HEIC') {
+        const jpegBuffer = await heic2any({
+          buffer: buffer,
+          format: 'JPEG',
+          quality: 0.9
+        });
+        return jpegBuffer;
+      }
+      return buffer;
+    }
+
+    // Example: Convert a specific file in the photos array
+    if (insertData.photos && insertData.photos.length > 0) {
+      const convertedPhotos = await Promise.all(
+        insertData.photos.map(async (photo) => {
+          const buffer = Buffer.from(photo, 'base64'); // Assuming photos are base64-encoded
+          return await convertHeicToJpeg(buffer, { type: 'image/heic' });
+        })
+      );
+      insertData.photos = convertedPhotos;
+    }
 
     const { data: result, error } = await supabase
       .from('gallery')
