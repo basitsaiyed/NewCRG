@@ -182,7 +182,7 @@ const PhotoUpload = () => {
   };
 
   return (
-    <div className="min-h-screen bg-amber-50/30">
+    <div className="min-h-screen bg-gray-50">
       <Navigation />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -432,7 +432,7 @@ const PhotoUpload = () => {
                   <div className="pt-4">
                     <Button
                       type="submit"
-                      className="w-full inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-11 rounded-md px-8 bg-amber-500 hover:bg-amber-600 text-white w-full sm:w-auto"
+                      className="w-full inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-11 rounded-md px-8 bg-primary hover:bg-primary/90 text-white w-full sm:w-auto"
                       disabled={uploading}
                     >
                       {uploading ? "Uploading..." : "Upload Photos"}

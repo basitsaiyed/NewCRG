@@ -17,18 +17,24 @@ const MeetingInfo = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <div className="bg-amber-100 p-3 rounded-full text-amber-600 flex-shrink-0">
+                <div className="bg-accent p-3 rounded-full text-gray-900 flex-shrink-0 shadow-md">
                   <MapPin className="h-5 w-5" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">Location</h3>
-                  <p className="text-gray-600">Harmony Living Ed Value Chain Solutions Pvt Ltd.</p>
-                  <p className="text-gray-600">E-329, 3rd Floor, Pramukh Anand Orbit Mall, Kudasan, Gandhinagar</p>
+                  <a 
+                    href="https://maps.app.goo.gl/ZStZ2c2FWUAhdy6bA" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-gray-600 hover:text-primary transition-colors underline"
+                  >
+                    GIFT City Fire Station, Training Room, First Floor, GIFT City
+                  </a>
                 </div>
               </div>
               
               <div className="flex items-start gap-4">
-                <div className="bg-amber-100 p-3 rounded-full text-amber-600 flex-shrink-0">
+                <div className="bg-accent p-3 rounded-full text-gray-900 flex-shrink-0 shadow-md">
                   <Calendar className="h-5 w-5" />
                 </div>
                 <div>
@@ -40,17 +46,17 @@ const MeetingInfo = () => {
             
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <div className="bg-amber-100 p-3 rounded-full text-amber-600 flex-shrink-0">
+                <div className="bg-accent p-3 rounded-full text-gray-900 flex-shrink-0 shadow-md">
                   <Clock className="h-5 w-5" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">Time</h3>
-                  <p className="text-gray-600">11:00 AM - 12:30 PM</p>
+                  <p className="text-gray-600">10:30 AM - 12:30 PM</p>
                 </div>
               </div>
               
               <div className="flex items-start gap-4">
-                <div className="bg-amber-100 p-3 rounded-full text-amber-600 flex-shrink-0">
+                <div className="bg-accent p-3 rounded-full text-gray-900 flex-shrink-0 shadow-md">
                   <Mic className="h-5 w-5" />
                 </div>
                 <div>

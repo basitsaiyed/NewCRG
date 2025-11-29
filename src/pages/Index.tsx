@@ -62,28 +62,28 @@ const Index = () => {
       <Navigation />
 
       {/* Hero Section */}
-      <section id="home" className="pt-24 py-16 md:py-24 bg-amber-50">
+      <section id="home" className="pt-24 py-16 md:py-24 bg-primary">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="md:w-1/2 space-y-6">
-              <div className="inline-block px-4 py-1 bg-amber-100 text-amber-700 rounded-full text-sm font-medium">
+              <div className="inline-block px-4 py-2 bg-accent text-gray-900 rounded-full text-sm font-bold shadow-lg">
                 Find your voice. Develop your leadership.
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-                Become A Better <span className="text-amber-500">Speaker</span> And Leader
+              <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+                Become A Better <span className="text-accent">Speaker</span> And Leader
               </h1>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-white/95">
                 Join our supportive community where you'll develop communication and leadership skills in a positive, feedback-rich environment.
               </p>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-white/95">
                 Whether you're a beginner or an experienced speaker, Toastmasters is the place for you to grow.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                {/* <span className="inline-block px-5 py-2 rounded-full bg-amber-100 text-amber-700 font-semibold text-lg shadow-sm hover:bg-amber-500 hover:text-white transition-all duration-300 cursor-pointer">
+                {/* <span className="inline-block px-5 py-2 rounded-full bg-accent text-gray-900 font-semibold text-lg shadow-sm hover:bg-accent/90 transition-all duration-300 cursor-pointer">
                   Visit as a Guest
                 </span><br /> */}
                 <Link to="/gallery">
-                  <Button size="lg" className="bg-amber-500 hover:bg-amber-600 text-white w-full sm:w-auto">
+                  <Button size="lg" className="bg-accent hover:bg-accent/90 text-gray-900 font-bold w-full sm:w-auto shadow-lg">
                     Gallery
                   </Button>
                 </Link>
@@ -113,8 +113,8 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="bg-amber-100 text-amber-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+            <div className="bg-primary/5 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all border-2 border-primary/20">
+              <div className="bg-accent text-gray-900 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <MessageCircle className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold mb-2 text-gray-900">Public Speaking Skills</h3>
@@ -123,8 +123,8 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="bg-amber-100 text-amber-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+            <div className="bg-primary/5 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all border-2 border-primary/20">
+              <div className="bg-accent text-gray-900 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Users className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold mb-2 text-gray-900">Leadership Development</h3>
@@ -133,8 +133,8 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="bg-amber-100 text-amber-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+            <div className="bg-primary/5 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all border-2 border-primary/20">
+              <div className="bg-accent text-gray-900 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <BookOpen className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold mb-2 text-gray-900">Structured Learning Path</h3>
@@ -143,8 +143,8 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="bg-amber-100 text-amber-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+            <div className="bg-primary/5 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all border-2 border-primary/20">
+              <div className="bg-accent text-gray-900 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Award className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold mb-2 text-gray-900">Professional Growth</h3>
@@ -153,8 +153,8 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="bg-amber-100 text-amber-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+            <div className="bg-primary/5 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all border-2 border-primary/20">
+              <div className="bg-accent text-gray-900 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Users className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold mb-2 text-gray-900">Networking Opportunities</h3>
@@ -163,8 +163,8 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="bg-amber-100 text-amber-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+            <div className="bg-primary/5 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all border-2 border-primary/20">
+              <div className="bg-accent text-gray-900 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <MessageCircle className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold mb-2 text-gray-900">Constructive Feedback</h3>
