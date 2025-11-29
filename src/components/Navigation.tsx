@@ -64,28 +64,28 @@ export default function Navigation() {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-primary'}`}>
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold text-amber-600">CRG Toastmasters Club</Link>
+        <Link to="/" className={`text-2xl font-bold ${scrolled ? 'text-primary' : 'text-accent'}`}>CRG Toastmasters Club</Link>
         <div className={`md:flex items-center space-x-8 ${isMenuOpen ? 'flex flex-col absolute top-full left-0 w-full bg-white shadow-md p-4 space-y-4 md:space-y-0 md:static md:flex-row md:shadow-none' : 'hidden'}`}>
-          <Link to="/" className="text-gray-700 hover:text-amber-500 transition-colors font-medium">Home</Link>
+          <Link to="/" className={`${scrolled ? 'text-gray-700 hover:text-primary' : 'text-white hover:text-accent'} transition-colors font-medium`}>Home</Link>
           <a 
             href="#benefits" 
             onClick={(e) => handleAnchorClick(e, 'benefits')} 
-            className="text-gray-700 hover:text-amber-500 transition-colors font-medium"
+            className={`${scrolled ? 'text-gray-700 hover:text-primary' : 'text-white hover:text-accent'} transition-colors font-medium`}
           >
             Benefits
           </a>
           <a 
             href="#team" 
             onClick={(e) => handleAnchorClick(e, 'team')} 
-            className="text-gray-700 hover:text-amber-500 transition-colors font-medium"
+            className={`${scrolled ? 'text-gray-700 hover:text-primary' : 'text-white hover:text-accent'} transition-colors font-medium`}
           >
             Our Team
           </a>
           <Link 
             to="/gallery" 
-            className="text-gray-700 hover:text-amber-500 transition-colors flex items-center group font-medium"
+            className={`${scrolled ? 'text-gray-700 hover:text-primary' : 'text-white hover:text-accent'} transition-colors flex items-center group font-medium`}
           >
             <ImageIcon className="w-4 h-4 mr-1 group-hover:scale-110 transition-transform" />
             <span className="group-hover:translate-x-1 transition-transform">Gallery</span>
@@ -93,13 +93,13 @@ export default function Navigation() {
           <a 
             href="#meetings" 
             onClick={(e) => handleAnchorClick(e, 'meetings')} 
-            className="text-gray-700 hover:text-amber-500 transition-colors font-medium"
+            className={`${scrolled ? 'text-gray-700 hover:text-primary' : 'text-white hover:text-accent'} transition-colors font-medium`}
           >
             Meetings
           </a>
         </div>
         <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
-          {isMenuOpen ? <X size={24} className="text-amber-500" /> : <Menu size={24} className="text-amber-500" />}
+          {isMenuOpen ? <X size={24} className={scrolled ? 'text-primary' : 'text-white'} /> : <Menu size={24} className={scrolled ? 'text-primary' : 'text-white'} />}
         </div>
       </div>
     </nav>
