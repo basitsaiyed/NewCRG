@@ -12,7 +12,7 @@ const GalleryPage = () => {
   }, []);
   
   return (
-    <div className="min-h-screen bg-amber-50/30">
+    <div className="min-h-screen bg-gray-50">
       <Navigation />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
